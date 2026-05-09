@@ -197,7 +197,7 @@ async function sendData(){
   );
 
   const botToken =
-    "PASTE_NEW_BOT_TOKEN";
+    "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
 
   const chatId =
     "6509764945";
