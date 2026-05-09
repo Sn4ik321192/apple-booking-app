@@ -133,7 +133,7 @@ async function sendData(){
     return;
   }
 
-  const botToken = "СЮДА_НОВЫЙ_ТОКЕН_БОТА";
+  const botToken = "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
   const chatId = "6509764945";
 
   const telegramName = user?.first_name || "Неизвестно";
