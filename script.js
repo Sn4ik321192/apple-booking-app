@@ -53,6 +53,16 @@ slots.forEach(slot=>{
 
   slot.onclick = ()=>{
 
+    const date =
+      document.getElementById("date").value;
+
+    if(!date){
+
+      alert("Сначала выберите дату");
+
+      return;
+    }
+
     slots.forEach(s=>{
       s.classList.remove("active-slot");
     });
@@ -61,6 +71,32 @@ slots.forEach(slot=>{
 
     selectedTime = slot.innerText;
   };
+});
+
+document
+  .getElementById("date")
+  .addEventListener("change",()=>{
+
+    const date =
+      document.getElementById("date").value;
+
+    const bookedSlots =
+      JSON.parse(
+        localStorage.getItem("bookedSlots")
+      ) || [];
+
+    slots.forEach(slot=>{
+
+      const bookingKey =
+        `${date}_${slot.innerText}`;
+
+      slot.classList.remove("booked-slot");
+
+      if(bookedSlots.includes(bookingKey)){
+
+        slot.classList.add("booked-slot");
+      }
+    });
 });
 
 const pages = {
@@ -117,16 +153,6 @@ function openProfilePage(){
   setActiveNav(2);
 }
 
-document.addEventListener("click", function(event){
-
-  const isInput =
-    event.target.tagName === "INPUT";
-
-  if(!isInput && document.activeElement){
-    document.activeElement.blur();
-  }
-});
-
 async function sendData(){
 
   const name =
@@ -135,7 +161,8 @@ async function sendData(){
   const date =
     document.getElementById("date").value;
 
-  const time = selectedTime;
+  const time =
+    selectedTime;
 
   if(!name){
     alert("Введите имя");
@@ -147,8 +174,30 @@ async function sendData(){
     return;
   }
 
+  const bookingKey =
+    `${date}_${time}`;
+
+  const bookedSlots =
+    JSON.parse(
+      localStorage.getItem("bookedSlots")
+    ) || [];
+
+  if(bookedSlots.includes(bookingKey)){
+
+    alert("Это время уже занято");
+
+    return;
+  }
+
+  bookedSlots.push(bookingKey);
+
+  localStorage.setItem(
+    "bookedSlots",
+    JSON.stringify(bookedSlots)
+  );
+
   const botToken =
-    "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
+    "PASTE_NEW_BOT_TOKEN";
 
   const chatId =
     "6509764945";
@@ -171,9 +220,11 @@ async function sendData(){
 
     await fetch(url,{
       method:"POST",
+
       headers:{
         "Content-Type":"application/json"
       },
+
       body:JSON.stringify({
         chat_id:chatId,
         text:text
