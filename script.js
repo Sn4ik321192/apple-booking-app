@@ -37,6 +37,8 @@ if(user){
 
 let selectedService = "💇 Стрижка";
 
+let selectedTime = "10:00";
+
 function selectService(element, service){
   selectedService = service;
 
@@ -121,7 +123,7 @@ async function sendData(){
 
   const name = document.getElementById("name").value.trim();
   const date = document.getElementById("date").value;
-  const time = document.getElementById("time").value;
+  const time = selectedTime;
 
   if(!name){
     alert("Введите имя");
@@ -176,6 +178,17 @@ async function sendData(){
     }
 
     document.getElementById("success").style.display = "block";
+    const booked =
+  JSON.parse(
+    localStorage.getItem("bookedSlots")
+  ) || [];
+
+booked.push(time);
+
+localStorage.setItem(
+  "bookedSlots",
+  JSON.stringify(booked)
+);
 
     document.getElementById("name").value = "";
     document.getElementById("date").value = "";
@@ -184,3 +197,41 @@ async function sendData(){
     alert("Нет соединения. Попробуйте ещё раз.");
   }
 }
+
+const slots =
+  document.querySelectorAll(".time-slot");
+
+slots.forEach(slot=>{
+
+  slot.onclick = ()=>{
+
+    slots.forEach(s=>{
+      s.classList.remove("active-slot");
+    });
+
+    slot.classList.add("active-slot");
+
+    selectedTime =
+      slot.innerText;
+  };
+});
+
+function loadBookedSlots(){
+
+  const booked =
+    JSON.parse(
+      localStorage.getItem("bookedSlots")
+    ) || [];
+
+  slots.forEach(slot=>{
+
+    if(booked.includes(slot.innerText)){
+
+      slot.classList.add("booked-slot");
+
+      slot.classList.remove("active-slot");
+    }
+  });
+}
+
+loadBookedSlots();
