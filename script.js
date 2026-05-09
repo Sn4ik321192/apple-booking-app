@@ -70,7 +70,7 @@ async function sendData(){
 
 📅 Дата: ${date}
 
-⏰ Время: ${time}
+⏰ Время: ${time}`;
 
   let url =
 `https://api.telegram.org/bot${botToken}/sendMessage`;
