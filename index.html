@@ -112,6 +112,42 @@
       transform:scale(1.03);
     }
 
+    .services{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+.service-card{
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:rgba(255,255,255,0.06);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  font-size:16px;
+
+  backdrop-filter:blur(10px);
+}
+
+.service-card:hover{
+  transform:scale(1.02);
+}
+
+.service-card.active{
+  background:white;
+  color:black;
+  font-weight:600;
+}
+
     .success{
       margin-top:20px;
       text-align:center;
@@ -134,7 +170,24 @@
 
   <input type="text" id="name" placeholder="Ваше имя">
 
-  <input type="text" id="service" placeholder="Услуга">
+  <div class="services">
+
+  <div class="service-card active"
+       onclick="selectService(this,'💇 Стрижка')">
+    💇 Стрижка
+  </div>
+
+  <div class="service-card"
+       onclick="selectService(this,'💅 Маникюр')">
+    💅 Маникюр
+  </div>
+
+  <div class="service-card"
+       onclick="selectService(this,'🎮 Другое')">
+    🎮 Другое
+  </div>
+
+</div>
 
   <input type="text" id="time" placeholder="Время">
 
@@ -155,8 +208,7 @@ async function sendData(){
   let name =
     document.getElementById("name").value;
 
-  let service =
-    document.getElementById("service").value;
+  let service = selectedService;
 
   let time =
     document.getElementById("time").value;
@@ -192,6 +244,21 @@ async function sendData(){
 
   document.getElementById("success")
     .style.display = "block";
+}
+
+let selectedService = "💇 Стрижка";
+
+function selectService(element,service){
+
+  selectedService = service;
+
+  document
+    .querySelectorAll(".service-card")
+    .forEach(card=>{
+      card.classList.remove("active");
+    });
+
+  element.classList.add("active");
 }
 
 </script>
