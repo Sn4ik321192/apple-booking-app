@@ -150,7 +150,7 @@
 
 <script>
 
-function sendData(){
+async function sendData(){
 
   let name =
     document.getElementById("name").value;
@@ -161,7 +161,34 @@ function sendData(){
   let time =
     document.getElementById("time").value;
 
-  console.log(name,service,time);
+  let botToken =
+    "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
+
+  let chatId =
+    "6509764945";
+
+  let text =
+`🔥 Новая заявка
+
+👤 Имя: ${name}
+
+🛠 Услуга: ${service}
+
+⏰ Время: ${time}`;
+
+  let url =
+`https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  await fetch(url,{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+      chat_id:chatId,
+      text:text
+    })
+  });
 
   document.getElementById("success")
     .style.display = "block";
