@@ -307,3 +307,45 @@ button:hover{
 #profileUsername{
   color:#bdbdbd;
 }
+
+.input-label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  margin-top:10px;
+
+  color:#d1d5db;
+
+  font-size:14px;
+}
+
+select{
+
+  width:100%;
+
+  padding:16px;
+
+  margin-bottom:15px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,0.08);
+
+  color:white;
+
+  font-size:16px;
+
+  outline:none;
+
+  appearance:none;
+
+  backdrop-filter:blur(10px);
+}
+
+option{
+  background:#111;
+}

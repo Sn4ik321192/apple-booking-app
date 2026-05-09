@@ -49,6 +49,9 @@ async function sendData(){
 
   let service = selectedService;
 
+  let date =
+  document.getElementById("date").value;
+
   let time =
     document.getElementById("time").value;
 
@@ -65,7 +68,9 @@ async function sendData(){
 
 🛠 Услуга: ${service}
 
-⏰ Время: ${time}`;
+📅 Дата: ${date}
+
+⏰ Время: ${time}
 
   let url =
 `https://api.telegram.org/bot${botToken}/sendMessage`;
