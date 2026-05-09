@@ -87,7 +87,7 @@ async function sendData(){
     .style.display = "block";
 }
 
-\const pages = {
+const pages = {
   home:
     document.getElementById("homePage"),
 
