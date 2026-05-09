@@ -86,3 +86,94 @@ async function sendData(){
   document.getElementById("success")
     .style.display = "block";
 }
+
+\const pages = {
+  home:
+    document.getElementById("homePage"),
+
+  booking:
+    document.getElementById("bookingPage"),
+
+  profile:
+    document.getElementById("profilePage")
+};
+
+function hidePages(){
+
+  Object.values(pages)
+    .forEach(page=>{
+      page.classList.remove("active-page");
+    });
+}
+
+function openBookingPage(){
+
+  hidePages();
+
+  pages.booking
+    .classList.add("active-page");
+}
+
+function openHomePage(){
+
+  hidePages();
+
+  pages.home
+    .classList.add("active-page");
+}
+
+function openProfilePage(){
+
+  hidePages();
+
+  pages.profile
+    .classList.add("active-page");
+}
+
+const navItems =
+  document.querySelectorAll(".nav-item");
+
+navItems[0].onclick = ()=>{
+
+  setActiveNav(0);
+
+  openHomePage();
+};
+
+navItems[1].onclick = ()=>{
+
+  setActiveNav(1);
+
+  openBookingPage();
+};
+
+navItems[2].onclick = ()=>{
+
+  setActiveNav(2);
+
+  openProfilePage();
+};
+
+function setActiveNav(index){
+
+  navItems.forEach(item=>{
+    item.classList.remove("active-nav");
+  });
+
+  navItems[index]
+    .classList.add("active-nav");
+}
+
+if(user){
+
+  document.getElementById("profileAvatar").src =
+    document.getElementById("userAvatar").src;
+
+  document.getElementById("profileName").innerText =
+    user.first_name || "User";
+
+  document.getElementById("profileUsername").innerText =
+    user.username
+      ? "@" + user.username
+      : "@telegram";
+}

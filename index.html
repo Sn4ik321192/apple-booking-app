@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Booking App</title>
+  <title>Apple Booking App</title>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -14,63 +14,130 @@
 
 <body>
 
-  <div class="bg"></div>
+<div class="bg"></div>
 
-  <div class="card">
+<div class="card">
 
-    <div class="profile">
-      <img id="userAvatar" class="avatar" src="" alt="avatar">
+  <div class="profile">
 
-      <div>
-        <div id="userName" class="user-name">
-          Гость
-        </div>
+    <img
+      id="userAvatar"
+      class="avatar"
+      src=""
+      alt="avatar">
 
-        <div id="userUsername" class="user-username">
-          @guest
-        </div>
-      </div>
-    </div>
+    <div>
 
-    <h1>Booking</h1>
-
-    <p>Запись в один клик</p>
-
-    <input type="text" id="name" placeholder="Ваше имя">
-
-    <div class="services">
-
-      <div class="service-card active"
-           onclick="selectService(this,'💇 Стрижка')">
-        💇 Стрижка
+      <div id="userName" class="user-name">
+        Гость
       </div>
 
-      <div class="service-card"
-           onclick="selectService(this,'💅 Маникюр')">
-        💅 Маникюр
+      <div id="userUsername" class="user-username">
+        @guest
       </div>
 
-      <div class="service-card"
-           onclick="selectService(this,'🎮 Другое')">
-        🎮 Другое
-      </div>
-
-    </div>
-
-    <input type="text" id="time" placeholder="Время">
-
-    <button onclick="sendData()">
-      Записаться
-    </button>
-
-    <div class="success" id="success">
-      ✅ Заявка отправлена
     </div>
 
   </div>
 
+  <div id="homePage" class="page active-page">
 
-  <div class="bottom-nav">
+  <h1>Booking</h1>
+
+  <p>Запись в один клик</p>
+
+  <button onclick="openBookingPage()">
+    Открыть запись
+  </button>
+
+</div>
+
+<div id="bookingPage" class="page">
+
+  <h1>Booking</h1>
+
+  <p>Создайте запись</p>
+
+  <input
+    type="text"
+    id="name"
+    placeholder="Ваше имя">
+
+  <div class="services">
+
+    <div
+      class="service-card active"
+      onclick="selectService(this,'💇 Стрижка')">
+
+      💇 Стрижка
+
+    </div>
+
+    <div
+      class="service-card"
+      onclick="selectService(this,'💅 Маникюр')">
+
+      💅 Маникюр
+
+    </div>
+
+    <div
+      class="service-card"
+      onclick="selectService(this,'🎮 Другое')">
+
+      🎮 Другое
+
+    </div>
+
+  </div>
+
+  <input
+    type="text"
+    id="time"
+    placeholder="Время">
+
+  <button onclick="sendData()">
+    Записаться
+  </button>
+
+</div>
+
+<div id="profilePage" class="page">
+
+  <h1>Profile</h1>
+
+  <p>Ваш Telegram профиль</p>
+
+  <div class="profile-big">
+
+    <img
+      id="profileAvatar"
+      class="profile-avatar"
+      src=""
+      alt="avatar">
+
+    <h2 id="profileName">
+      User
+    </h2>
+
+    <span id="profileUsername">
+      @username
+    </span>
+
+  </div>
+
+</div>
+
+<div class="success" id="success">
+  ✅ Заявка отправлена
+</div>
+  <div class="success" id="success">
+    ✅ Заявка отправлена
+  </div>
+
+</div>
+
+<div class="bottom-nav">
 
   <div class="nav-item active-nav">
     <span>🏠</span>
@@ -90,8 +157,6 @@
 </div>
 
 <script src="script.js"></script>
-
-  <script src="script.js"></script>
 
 </body>
 </html>
