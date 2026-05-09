@@ -5,14 +5,10 @@
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Arial,sans-serif;
 }
 
-html,
-body{
-  min-height:100%;
-}
-
 body{
   background:#0f0f10;
   color:white;
+  min-height:100vh;
   overflow-x:hidden;
 }
 
@@ -33,10 +29,9 @@ body{
 .app{
   width:100%;
   min-height:100vh;
-  padding:24px 20px 130px;
+  padding:24px 20px 140px;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
 }
 
 .card{
@@ -47,22 +42,8 @@ body{
   border-radius:34px;
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
   border:1px solid rgba(255,255,255,0.12);
   box-shadow:0 12px 40px rgba(0,0,0,0.35);
-  animation:fade 0.5s ease;
-}
-
-@keyframes fade{
-  from{
-    opacity:0;
-    transform:translateY(18px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
 }
 
 .profile{
@@ -77,8 +58,6 @@ body{
   height:54px;
   border-radius:50%;
   object-fit:cover;
-  background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.2);
 }
 
 .user-name{
@@ -96,64 +75,34 @@ h1{
   font-size:34px;
   margin-bottom:10px;
   font-weight:800;
-  letter-spacing:-0.5px;
 }
 
 p{
   color:#bdbdbd;
   margin-bottom:24px;
-  line-height:1.4;
 }
 
-input,
-select{
-
+input{
   width:100%;
-
   min-height:56px;
-
   padding:16px;
-
   margin-bottom:15px;
-
   border:none;
-
   border-radius:18px;
-
   background:rgba(255,255,255,0.09);
-
   color:white;
-
   font-size:16px;
-
   outline:none;
-
-  backdrop-filter:blur(12px);
-
-  -webkit-backdrop-filter:blur(12px);
-
-  appearance:none;
-
-  -webkit-appearance:none;
 }
 
-input:focus,
-select:focus{
-  background:rgba(255,255,255,0.14);
-}
-
-select{
-  appearance:none;
-  -webkit-appearance:none;
-}
-
-option{
-  background:#111;
+input[type="date"]::-webkit-calendar-picker-indicator{
+  filter:invert(1);
 }
 
 .input-label{
   display:block;
-  margin:10px 0 8px;
+  margin-bottom:8px;
+  margin-top:10px;
   color:#d1d5db;
   font-size:14px;
 }
@@ -172,15 +121,31 @@ option{
   border:1px solid rgba(255,255,255,0.1);
   cursor:pointer;
   transition:0.25s;
-  font-size:16px;
-  user-select:none;
-}
-
-.service-card:active{
-  transform:scale(0.97);
 }
 
 .service-card.active{
+  background:white;
+  color:black;
+  font-weight:700;
+}
+
+.time-slots{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.time-slot{
+  padding:14px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.07);
+  text-align:center;
+  cursor:pointer;
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.active-slot{
   background:white;
   color:black;
   font-weight:700;
@@ -196,12 +161,6 @@ button{
   font-size:16px;
   font-weight:700;
   cursor:pointer;
-  transition:0.25s;
-  margin-top:6px;
-}
-
-button:active{
-  transform:scale(0.97);
 }
 
 .success{
@@ -209,28 +168,14 @@ button:active{
   text-align:center;
   color:#7CFFB2;
   display:none;
-  font-weight:600;
 }
 
 .page{
   display:none;
-  animation:pageAnimation 0.35s ease;
 }
 
 .active-page{
   display:block;
-}
-
-@keyframes pageAnimation{
-  from{
-    opacity:0;
-    transform:translateY(14px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
 }
 
 .profile-big{
@@ -246,22 +191,12 @@ button:active{
   height:112px;
   border-radius:50%;
   object-fit:cover;
-  border:1px solid rgba(255,255,255,0.18);
-}
-
-#profileName{
-  font-size:26px;
-  margin-top:8px;
-}
-
-#profileUsername{
-  color:#bdbdbd;
 }
 
 .bottom-nav{
   position:fixed;
   left:50%;
-  bottom:calc(18px + env(safe-area-inset-bottom));
+  bottom:18px;
   transform:translateX(-50%);
   width:calc(100% - 32px);
   max-width:390px;
@@ -269,12 +204,9 @@ button:active{
   border-radius:30px;
   background:rgba(28,28,30,0.72);
   backdrop-filter:blur(28px);
-  -webkit-backdrop-filter:blur(28px);
   border:1px solid rgba(255,255,255,0.12);
   display:flex;
   justify-content:space-around;
-  align-items:center;
-  box-shadow:0 10px 35px rgba(0,0,0,0.45);
   z-index:1000;
 }
 
@@ -285,10 +217,7 @@ button:active{
   gap:3px;
   color:#9ca3af;
   font-size:12px;
-  transition:0.25s;
   cursor:pointer;
-  user-select:none;
-  min-width:70px;
 }
 
 .nav-item span{
@@ -300,78 +229,6 @@ button:active{
   color:inherit;
 }
 
-.nav-item:active{
-  transform:scale(0.92);
-}
-
 .active-nav{
   color:white;
-}
-
-input[type="date"]{
-
-  color:white;
-
-  position:relative;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator{
-
-  filter:invert(1);
-
-  opacity:0.8;
-
-  cursor:pointer;
-}
-
-.time-slots{
-
-  display:grid;
-
-  grid-template-columns:
-  repeat(3,1fr);
-
-  gap:10px;
-
-  margin-bottom:20px;
-}
-
-.time-slot{
-
-  padding:14px;
-
-  border-radius:16px;
-
-  background:
-  rgba(255,255,255,0.07);
-
-  text-align:center;
-
-  cursor:pointer;
-
-  transition:0.25s;
-
-  border:1px solid
-  rgba(255,255,255,0.08);
-
-  user-select:none;
-}
-
-.time-slot:active{
-  transform:scale(0.95);
-}
-
-.active-slot{
-  background:white;
-  color:black;
-  font-weight:700;
-}
-
-.booked-slot{
-
-  opacity:0.35;
-
-  pointer-events:none;
-
-  text-decoration:line-through;
 }

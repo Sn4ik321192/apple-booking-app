@@ -7,14 +7,12 @@ if(tg){
 
 const user = tg?.initDataUnsafe?.user;
 
-const defaultAvatar =
-  "https://ui-avatars.com/api/?name=User&background=111111&color=ffffff";
-
 if(user){
-  const avatarUrl = user.photo_url ||
+
+  const avatarUrl =
+    user.photo_url ||
     "https://ui-avatars.com/api/?name=" +
-    encodeURIComponent(user.first_name || "User") +
-    "&background=111111&color=ffffff";
+    encodeURIComponent(user.first_name || "User");
 
   document.getElementById("userName").innerText =
     user.first_name || "Пользователь";
@@ -23,6 +21,7 @@ if(user){
     user.username ? "@" + user.username : "Telegram user";
 
   document.getElementById("userAvatar").src = avatarUrl;
+
   document.getElementById("profileAvatar").src = avatarUrl;
 
   document.getElementById("profileName").innerText =
@@ -30,172 +29,21 @@ if(user){
 
   document.getElementById("profileUsername").innerText =
     user.username ? "@" + user.username : "@telegram";
-}else{
-  document.getElementById("userAvatar").src = defaultAvatar;
-  document.getElementById("profileAvatar").src = defaultAvatar;
 }
 
 let selectedService = "💇 Стрижка";
-
 let selectedTime = "10:00";
 
 function selectService(element, service){
+
   selectedService = service;
 
-  document.querySelectorAll(".service-card").forEach(card=>{
-    card.classList.remove("active");
-  });
-
-  element.classList.add("active");
-}
-
-const pages = {
-  home: document.getElementById("homePage"),
-  booking: document.getElementById("bookingPage"),
-  profile: document.getElementById("profilePage")
-};
-
-const navItems = document.querySelectorAll(".nav-item");
-
-function hideKeyboard(){
-  if(document.activeElement){
-    document.activeElement.blur();
-  }
-}
-
-function showPage(pageName, navIndex){
-  hideKeyboard();
-
-  Object.values(pages).forEach(page=>{
-    page.classList.remove("active-page");
-  });
-
-  pages[pageName].classList.add("active-page");
-
-  navItems.forEach(item=>{
-    item.classList.remove("active-nav");
-  });
-
-  navItems[navIndex].classList.add("active-nav");
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-function openHomePage(){
-  showPage("home", 0);
-}
-
-function openBookingPage(){
-  showPage("booking", 1);
-}
-
-function openProfilePage(){
-  showPage("profile", 2);
-}
-
-document.addEventListener("click", function(event){
-  const isInput =
-    event.target.tagName === "INPUT" ||
-    event.target.tagName === "SELECT" ||
-    event.target.tagName === "TEXTAREA";
-
-  if(!isInput){
-    hideKeyboard();
-  }
-});
-
-document.querySelectorAll("input, select").forEach(element=>{
-  element.addEventListener("focus", ()=>{
-    setTimeout(()=>{
-      element.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-      });
-    }, 250);
-  });
-});
-
-async function sendData(){
-  hideKeyboard();
-
-  const name = document.getElementById("name").value.trim();
-  const date = document.getElementById("date").value;
-  const time = selectedTime;
-
-  if(!name){
-    alert("Введите имя");
-    return;
-  }
-
-  if(!date){
-    alert("Выберите дату");
-    return;
-  }
-
-  const botToken = "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
-  const chatId = "6509764945";
-
-  const telegramName = user?.first_name || "Неизвестно";
-  const telegramUsername = user?.username
-    ? "@" + user.username
-    : "без username";
-
-  const text =
-`🔥 Новая заявка
-
-👤 Имя: ${name}
-
-🛠 Услуга: ${selectedService}
-
-📅 Дата: ${date}
-
-⏰ Время: ${time}
-
-📲 Telegram: ${telegramName}
-🔗 Username: ${telegramUsername}`;
-
-  const url =
-    `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-  try{
-    const response = await fetch(url,{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify({
-        chat_id:chatId,
-        text:text
-      })
+  document.querySelectorAll(".service-card")
+    .forEach(card=>{
+      card.classList.remove("active");
     });
 
-    if(!response.ok){
-      alert("Ошибка отправки заявки");
-      return;
-    }
-
-    document.getElementById("success").style.display = "block";
-    const booked =
-  JSON.parse(
-    localStorage.getItem("bookedSlots")
-  ) || [];
-
-booked.push(time);
-
-localStorage.setItem(
-  "bookedSlots",
-  JSON.stringify(booked)
-);
-
-    document.getElementById("name").value = "";
-    document.getElementById("date").value = "";
-
-  }catch(error){
-    alert("Нет соединения. Попробуйте ещё раз.");
-  }
+  element.classList.add("active");
 }
 
 const slots =
@@ -211,27 +59,132 @@ slots.forEach(slot=>{
 
     slot.classList.add("active-slot");
 
-    selectedTime =
-      slot.innerText;
+    selectedTime = slot.innerText;
   };
 });
 
-function loadBookedSlots(){
+const pages = {
+  home: document.getElementById("homePage"),
+  booking: document.getElementById("bookingPage"),
+  profile: document.getElementById("profilePage")
+};
 
-  const booked =
-    JSON.parse(
-      localStorage.getItem("bookedSlots")
-    ) || [];
+const navItems =
+  document.querySelectorAll(".nav-item");
 
-  slots.forEach(slot=>{
+function hidePages(){
 
-    if(booked.includes(slot.innerText)){
-
-      slot.classList.add("booked-slot");
-
-      slot.classList.remove("active-slot");
-    }
-  });
+  Object.values(pages)
+    .forEach(page=>{
+      page.classList.remove("active-page");
+    });
 }
 
-loadBookedSlots();
+function setActiveNav(index){
+
+  navItems.forEach(item=>{
+    item.classList.remove("active-nav");
+  });
+
+  navItems[index]
+    .classList.add("active-nav");
+}
+
+function openHomePage(){
+
+  hidePages();
+
+  pages.home.classList.add("active-page");
+
+  setActiveNav(0);
+}
+
+function openBookingPage(){
+
+  hidePages();
+
+  pages.booking.classList.add("active-page");
+
+  setActiveNav(1);
+}
+
+function openProfilePage(){
+
+  hidePages();
+
+  pages.profile.classList.add("active-page");
+
+  setActiveNav(2);
+}
+
+document.addEventListener("click", function(event){
+
+  const isInput =
+    event.target.tagName === "INPUT";
+
+  if(!isInput && document.activeElement){
+    document.activeElement.blur();
+  }
+});
+
+async function sendData(){
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const date =
+    document.getElementById("date").value;
+
+  const time = selectedTime;
+
+  if(!name){
+    alert("Введите имя");
+    return;
+  }
+
+  if(!date){
+    alert("Выберите дату");
+    return;
+  }
+
+  const botToken =
+    "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
+
+  const chatId =
+    "6509764945";
+
+  const text =
+`🔥 Новая заявка
+
+👤 Имя: ${name}
+
+🛠 Услуга: ${selectedService}
+
+📅 Дата: ${date}
+
+⏰ Время: ${time}`;
+
+  const url =
+`https://api.telegram.org/bot${botToken}/sendMessage`;
+
+  try{
+
+    await fetch(url,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        chat_id:chatId,
+        text:text
+      })
+    });
+
+    document.getElementById("success")
+      .style.display = "block";
+
+  }catch(error){
+
+    alert("Ошибка отправки");
+  }
+}

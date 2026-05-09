@@ -3,150 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
   <title>Apple Booking App</title>
 
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="bg"></div>
+<div class="bg"></div>
 
-  <main class="app">
+<main class="app">
 
-    <section class="card">
+<section class="card">
 
-      <div class="profile">
-        <img id="userAvatar" class="avatar" src="" alt="avatar">
+<div class="profile">
+  <img id="userAvatar" class="avatar" src="" alt="avatar">
 
-        <div>
-          <div id="userName" class="user-name">Гость</div>
-          <div id="userUsername" class="user-username">@guest</div>
-        </div>
-      </div>
+  <div>
+    <div id="userName" class="user-name">Гость</div>
+    <div id="userUsername" class="user-username">@guest</div>
+  </div>
+</div>
 
-      <div id="homePage" class="page active-page">
-        <h1>Booking</h1>
-        <p>Премиальная запись в один клик</p>
+<div id="homePage" class="page active-page">
 
-        <button onclick="openBookingPage()">
-          Открыть запись
-        </button>
-      </div>
+  <h1>Booking</h1>
 
-      <div id="bookingPage" class="page">
-        <h1>Запись</h1>
-        <p>Выберите услугу, дату и время</p>
+  <p>Премиальная запись в один клик</p>
 
-        <input type="text" id="name" placeholder="Ваше имя">
+  <button onclick="openBookingPage()">
+    Открыть запись
+  </button>
 
-        <div class="services">
-          <div class="service-card active" onclick="selectService(this,'💇 Стрижка')">
-            💇 Стрижка
-          </div>
+</div>
 
-          <div class="service-card" onclick="selectService(this,'💅 Маникюр')">
-            💅 Маникюр
-          </div>
+<div id="bookingPage" class="page">
 
-          <div class="service-card" onclick="selectService(this,'🎮 Другое')">
-            🎮 Другое
-          </div>
-        </div>
+  <h1>Запись</h1>
 
-        <label class="input-label">📅 Дата</label>
-        <input
-  type="date"
-  id="date"
-  placeholder="Выберите дату">
+  <p>Выберите услугу, дату и время</p>
 
-        <label class="input-label">⏰ Время</label>
+  <input type="text" id="name" placeholder="Ваше имя">
 
-<div class="time-slots" id="timeSlots">
+  <div class="services">
 
-  <div class="time-slot active-slot">
-    10:00
+    <div class="service-card active"
+         onclick="selectService(this,'💇 Стрижка')">
+      💇 Стрижка
+    </div>
+
+    <div class="service-card"
+         onclick="selectService(this,'💅 Маникюр')">
+      💅 Маникюр
+    </div>
+
+    <div class="service-card"
+         onclick="selectService(this,'🎮 Другое')">
+      🎮 Другое
+    </div>
+
   </div>
 
-  <div class="time-slot">
-    11:00
+  <label class="input-label">📅 Дата</label>
+
+  <input
+    type="date"
+    id="date">
+
+  <label class="input-label">⏰ Время</label>
+
+  <div class="time-slots">
+
+    <div class="time-slot active-slot">10:00</div>
+    <div class="time-slot">11:00</div>
+    <div class="time-slot">12:00</div>
+    <div class="time-slot">13:00</div>
+    <div class="time-slot">14:00</div>
+    <div class="time-slot">15:00</div>
+    <div class="time-slot">16:00</div>
+    <div class="time-slot">17:00</div>
+    <div class="time-slot">18:00</div>
+
   </div>
 
-  <div class="time-slot">
-    12:00
-  </div>
+  <button onclick="sendData()">
+    Записаться
+  </button>
 
-  <div class="time-slot">
-    13:00
-  </div>
-
-  <div class="time-slot">
-    14:00
-  </div>
-
-  <div class="time-slot">
-    15:00
-  </div>
-
-  <div class="time-slot">
-    16:00
-  </div>
-
-  <div class="time-slot">
-    17:00
-  </div>
-
-  <div class="time-slot">
-    18:00
+  <div class="success" id="success">
+    ✅ Заявка отправлена
   </div>
 
 </div>
-        </select>
 
-        <button onclick="sendData()">
-          Записаться
-        </button>
+<div id="profilePage" class="page">
 
-        <div class="success" id="success">
-          ✅ Заявка отправлена
-        </div>
-      </div>
+  <h1>Profile</h1>
 
-      <div id="profilePage" class="page">
-        <h1>Profile</h1>
-        <p>Ваш Telegram профиль</p>
+  <p>Ваш Telegram профиль</p>
 
-        <div class="profile-big">
-          <img id="profileAvatar" class="profile-avatar" src="" alt="avatar">
-          <h2 id="profileName">User</h2>
-          <span id="profileUsername">@username</span>
-        </div>
-      </div>
+  <div class="profile-big">
 
-    </section>
+    <img id="profileAvatar"
+         class="profile-avatar"
+         src=""
+         alt="avatar">
 
-  </main>
+    <h2 id="profileName">User</h2>
 
-  <nav class="bottom-nav">
-    <div class="nav-item active-nav" onclick="openHomePage()">
-      <span>🏠</span>
-      <p>Home</p>
-    </div>
+    <span id="profileUsername">
+      @username
+    </span>
 
-    <div class="nav-item" onclick="openBookingPage()">
-      <span>📅</span>
-      <p>Booking</p>
-    </div>
+  </div>
 
-    <div class="nav-item" onclick="openProfilePage()">
-      <span>👤</span>
-      <p>Profile</p>
-    </div>
-  </nav>
+</div>
 
-  <script src="script.js"></script>
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+
+  <div class="nav-item active-nav"
+       onclick="openHomePage()">
+    <span>🏠</span>
+    <p>Home</p>
+  </div>
+
+  <div class="nav-item"
+       onclick="openBookingPage()">
+    <span>📅</span>
+    <p>Booking</p>
+  </div>
+
+  <div class="nav-item"
+       onclick="openProfilePage()">
+    <span>👤</span>
+    <p>Profile</p>
+  </div>
+
+</nav>
+
+<script src="script.js"></script>
 
 </body>
 </html>
