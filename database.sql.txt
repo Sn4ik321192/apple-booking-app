@@ -1,0 +1,32 @@
+-- SERVICES TABLE
+create table if not exists services (
+  id uuid primary key default gen_random_uuid(),
+  icon text not null default '✨',
+  title text not null,
+  description text,
+  created_at timestamp with time zone default now()
+);
+
+-- BOOKINGS TABLE
+create table if not exists bookings (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  service text not null,
+  date date not null,
+  time text not null,
+  phone text,
+  telegram_name text,
+  telegram_username text,
+  created_at timestamp with time zone default now()
+);
+
+-- DEFAULT SERVICES
+insert into services (icon, title, description)
+values
+  ('🌿', 'Консультация', 'Базовая консультация'),
+  ('💆', 'Процедура', 'Основная услуга'),
+  ('✨', 'Премиум услуга', 'Расширенная услуга');
+
+-- PREVENT DOUBLE BOOKING
+create unique index if not exists unique_booking_slot
+on bookings (date, time);
