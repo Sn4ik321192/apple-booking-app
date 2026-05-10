@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "http://127.0.0.1:5000";
 const BOT_TOKEN = "8708273025:AAFCkyhImnun4XRnHsMhi0vV1lDBGnobI8Q";
 const ADMIN_CHAT_ID = "6509764945";
 
